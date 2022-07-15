@@ -7,11 +7,22 @@
 
 import SwiftUI
 
+
+//atribute author of the logo <a href='https://www.freepik.com/vectors/flat-logo'>Flat logo vector created by freepik - www.freepik.com</a>
 @main
 struct RecipesApp: App {
+    
+    @StateObject private var vm = HomeViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                //DetailedRecipeLoadingView()
+                HomeView()
+                    .navigationBarHidden(true)
+            }
+            .environmentObject(vm)
+            
         }
     }
 }
