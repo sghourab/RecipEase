@@ -66,7 +66,7 @@ class RecipeDataService {
             "X-RapidAPI-Host": "tasty.p.rapidapi.com",
             "X-RapidAPI-Key": "4c8b969e9dmsh434d8985f483c8bp12e5f0jsn599a35f02a67"
         ]
-        for id in ids {
+        for (index,id) in ids.enumerated() {
        //    dispatchGroup.enter()
         let request = NSMutableURLRequest(url: NSURL(string: savedRecipeUrlString + "\(id)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
@@ -80,8 +80,11 @@ class RecipeDataService {
 
                     print(" RETURNED RECIPE HERE: \(returnedRecipe)")
                     savedRecipes.append(returnedRecipe)
-                    completion(savedRecipes)
                     self?.recipeSubscription?.cancel()
+                    if index == ids.count - 1 {
+                        completion(savedRecipes)
+                    }
+                    
 
             })
             

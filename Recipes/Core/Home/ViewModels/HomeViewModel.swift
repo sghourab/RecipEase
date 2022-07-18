@@ -44,7 +44,7 @@ class HomeViewModel: ObservableObject {
         upDateMealTagsForURL()
         upDateURL()
         addSubscribers()
-       // retrieveSavedIDsFromCoreData()
+        retrieveSavedIDsFromCoreData()
     }
     
     func mealTagsSaveToAppStorage(){
@@ -214,10 +214,12 @@ class HomeViewModel: ObservableObject {
 //                      }
 //              }
     
-    private func retrieveSavedIDsFromCoreData() {
+    func retrieveSavedIDsFromCoreData() {
         for entity in savedRecipesDataService.savedEntities {
             savedRecipeIDs.append(Int(entity.recipeID))
+           
         }
+        print("HERE: \(savedRecipeIDs)")
     }
     enum MealTags: String, CaseIterable {
         case breakfast

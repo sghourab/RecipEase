@@ -17,16 +17,20 @@ class LikedRecipesViewModel: ObservableObject {
     @Published var savedRecipesArrangedByTags: [String: [Recipe]] = [MealTags.breakfast.rawValue: [], MealTags.lunch.rawValue: [], MealTags.dinner.rawValue: [], MealTags.desserts.rawValue: [], MealTags.snacks.rawValue: [], "sides And Appetizers": []]
     
     init(){
-      
+        self.getSavedRecipes()
+    }
+
+    func getSavedRecipes() {
+ 
+        homeVM.retrieveSavedIDsFromCoreData()
+        print("home saved = \(homeVM.savedRecipes)")
         dataService.getSavedRecipe(ids: homeVM.savedRecipeIDs) { recipes in
-           
+            print("saved recepies count == \(recipes?.count)")
             self.savedRecipes = recipes!
             self.arrangeRecipesByType2()
             
         }
-        
     }
-
     enum MealTags: String {
         case breakfast
         case lunch
@@ -96,11 +100,18 @@ struct LikedRecipesView: View {
                
                myCookBooksTitle
                myCookBooksHScroll
+
                
-        }
+           }.onAppear {
+               getSavedRecpies()
+           }
        }
     
 
+    }
+    
+    func getSavedRecpies() {
+        self.vm.getSavedRecipes()
     }
 }
 
