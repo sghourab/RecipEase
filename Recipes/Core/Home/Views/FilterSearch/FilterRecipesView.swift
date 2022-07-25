@@ -131,12 +131,10 @@ extension FilterRecipesView {
 
                             
                             vm.mealTypeDefaults[index].include.toggle()
-                      //      print(vm.mealTypeDefaults[index].include)
                          
                         } label: {
                             MealFilterGridView(filterOptions: vm.mealTypeDefaults, index: index)
                            
-                            
                         }
 
                     }
@@ -147,8 +145,7 @@ extension FilterRecipesView {
 
                         Button {
                             vm.mealType[index].include.toggle()
-                       //     print(vm.mealType[index].include)
-                       //     print("is this ever called????")
+                     
                         } label: {
                             
                             MealFilterGridView(filterOptions: vm.mealType, index: index)

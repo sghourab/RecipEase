@@ -30,10 +30,14 @@ struct HomeView: View {
                 homeHeaderView
                     
                 
-                SearchBarView(placeholder: "search recipe name or ingredient", searchText: $vm.searchText)
+                SearchBarView(placeholder: "Search recipe name or ingredient", searchText: $vm.searchText)
             
+                if vm.showHomeView {
                 allRecipesList
-               
+                } else
+                {
+                    ProgressView()
+                }
                 Spacer(minLength: 0)
             }
             .sheet(isPresented: $showFilterView) {
@@ -47,8 +51,7 @@ struct HomeView: View {
                 vm.mealTagsSaveToAppStorage()
                 vm.loadMealFiltersFromAppStorage()
                
-              //  vm.upDateURL()
-              //  vm.addSubscribers()
+           
                 
                 
             }
@@ -87,21 +90,6 @@ extension HomeView {
     
     private var homeHeaderView: some View {
       
-//        HStack {
-//            NavigationLink {
-//
-//              //  if vm.showLikedView == true {
-//
-//                LikedRecipesView(vm: LikedRecipesViewModel())
-//                   // .environmentObject(vm)
-////                } else {
-////                    ProgressView()
-////                }
-//            } label: {
-//                CircleButtonView(iconName: "person.fill")
-//            }.simultaneousGesture(TapGesture().onEnded({
-//               // vm.retrieveSavedRecipesFromCoreData()
-//            }))
         HStack {
         CircleButtonView(iconName: "person.fill")
             .onTapGesture {
@@ -122,7 +110,6 @@ extension HomeView {
             .background(
                 NavigationLink(isActive: $showLikedRecipesView, destination: {
                    NavigationLazyView(LikedRecipesView(vm: LikedRecipesViewModel()))
-                  // LikedRecipesView(vm: LikedRecipesViewModel())
                 }, label: {
                     EmptyView()
                 })
@@ -139,7 +126,6 @@ extension HomeView {
                     .onTapGesture {
                         segue(recipe: recipe)
                     }
-            
             }
         }
         .listStyle(PlainListStyle())

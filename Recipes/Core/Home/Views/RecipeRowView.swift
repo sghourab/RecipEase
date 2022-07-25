@@ -28,10 +28,7 @@ struct RecipeRowView: View {
                     .padding(.bottom, 0)
 
             }
-            
-            
-                
-            
+                     
         }
             
     }

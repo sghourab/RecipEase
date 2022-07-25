@@ -24,6 +24,8 @@
 		00544466287DF5520043A0D1 /* LikedByMealTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00544465287DF5520043A0D1 /* LikedByMealTypeView.swift */; };
 		00544468287FA34E0043A0D1 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00544467287FA34E0043A0D1 /* Sequence.swift */; };
 		005444772887382B0043A0D1 /* DetailedRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005444762887382B0043A0D1 /* DetailedRecipeViewModel.swift */; };
+		0054447A288EF2740043A0D1 /* LikedRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00544479288EF2740043A0D1 /* LikedRecipesViewModel.swift */; };
+		0054447C288EF2BB0043A0D1 /* LikedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054447B288EF2BB0043A0D1 /* LikedRecipe.swift */; };
 		00961C7828452FC10004E4DC /* RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00961C7728452FC10004E4DC /* RecipesApp.swift */; };
 		00961C7A28452FC10004E4DC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00961C7928452FC10004E4DC /* ContentView.swift */; };
 		00961C7C28452FC30004E4DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00961C7B28452FC30004E4DC /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		00544465287DF5520043A0D1 /* LikedByMealTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedByMealTypeView.swift; sourceTree = "<group>"; };
 		00544467287FA34E0043A0D1 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		005444762887382B0043A0D1 /* DetailedRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRecipeViewModel.swift; sourceTree = "<group>"; };
+		00544479288EF2740043A0D1 /* LikedRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedRecipesViewModel.swift; sourceTree = "<group>"; };
+		0054447B288EF2BB0043A0D1 /* LikedRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedRecipe.swift; sourceTree = "<group>"; };
 		00961C7428452FC10004E4DC /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00961C7728452FC10004E4DC /* RecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesApp.swift; sourceTree = "<group>"; };
 		00961C7928452FC10004E4DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -126,11 +130,28 @@
 		00544460287724750043A0D1 /* LikedRecipes */ = {
 			isa = PBXGroup;
 			children = (
+				0054447D288EF6C70043A0D1 /* Views */,
+				00544478288EF24A0043A0D1 /* View Models */,
+			);
+			path = LikedRecipes;
+			sourceTree = "<group>";
+		};
+		00544478288EF24A0043A0D1 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				00544479288EF2740043A0D1 /* LikedRecipesViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		0054447D288EF6C70043A0D1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				00544461287724A00043A0D1 /* LikedRecipesView.swift */,
 				00544463287C81630043A0D1 /* CookBookView.swift */,
 				00544465287DF5520043A0D1 /* LikedByMealTypeView.swift */,
 			);
-			path = LikedRecipes;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		00961C6B28452FC10004E4DC = {
@@ -248,6 +269,7 @@
 			children = (
 				00961C9328467A190004E4DC /* RecipesListModel.swift */,
 				00544448286A0B4E0043A0D1 /* MealTagsPreferences.swift */,
+				0054447B288EF2BB0043A0D1 /* LikedRecipe.swift */,
 				0054445B2875FA760043A0D1 /* SavedRecipesContainer.xcdatamodeld */,
 			);
 			path = Models;
@@ -367,6 +389,7 @@
 				0054445F2875FB720043A0D1 /* SavedRecipesDataService.swift in Sources */,
 				0054445A2874D9D20043A0D1 /* View.swift in Sources */,
 				0054444B286B5C680043A0D1 /* TastyAPIUrlGenerator.swift in Sources */,
+				0054447C288EF2BB0043A0D1 /* LikedRecipe.swift in Sources */,
 				005444472868F3710043A0D1 /* DetailedRecipeView.swift in Sources */,
 				00961C98284A92F90004E4DC /* PreviewProvider.swift in Sources */,
 				0054445D2875FA760043A0D1 /* SavedRecipesContainer.xcdatamodeld in Sources */,
@@ -374,6 +397,7 @@
 				00CD73C42854668E00B4A811 /* NetworkingManager.swift in Sources */,
 				0054443A285A34220043A0D1 /* UIApplication.swift in Sources */,
 				00CD73C1284EF20D00B4A811 /* RecipeDataService.swift in Sources */,
+				0054447A288EF2740043A0D1 /* LikedRecipesViewModel.swift in Sources */,
 				00CD73CB2856F30000B4A811 /* RecipeImageViewModel.swift in Sources */,
 				00961C912845C7EB0004E4DC /* CircleButtonView.swift in Sources */,
 				00CD73C92856EE4300B4A811 /* RecipeImageService.swift in Sources */,

@@ -34,10 +34,6 @@ struct LikedByMealTypeView: View {
     }
 }
 
-
-
-
-
 struct LikedByMealTypeView_Previews: PreviewProvider {
     static var previews: some View {
         LikedByMealTypeView()
