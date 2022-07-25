@@ -29,11 +29,13 @@ struct DetailedRecipe: View {
    // @State var savedRecipeIDs: [Int] = []
     @State private var showInstructions: Bool = false
    // let savedRecipesCD = SavedRecipesDataService()
-    
+    @StateObject var detailedRecipeVM: DetailedRecipeViewModel
     
     init(recipe: Recipe) {
         self.recipe = recipe
-       
+        
+        _detailedRecipeVM = StateObject(wrappedValue: DetailedRecipeViewModel(recipe: recipe))
+        
     }
     
     var body: some View {
@@ -53,6 +55,7 @@ struct DetailedRecipe: View {
                 cookTimeAndServingNumView
                 .padding(.horizontal)
                 }
+               
                 
             }
             VStack(alignment: .leading){
@@ -74,11 +77,16 @@ struct DetailedRecipe: View {
         }
             
         }.onAppear {
-            print(vm.savedRecipeIDs)
-            if vm.savedRecipeIDs.contains(recipe.id) {
-                print("it does")
-                likedTapped = true
+            let savedRecipesInCD = vm.savedRecipesDataService.savedRecipes
+            for savedRecipe in savedRecipesInCD {
+                if recipe.id == savedRecipe.recipeID {
+                    likedTapped = true
             }
+            }
+//            if vm.savedRecipeIDs.contains(recipe.id) {
+//                print("it does")
+//                likedTapped = true
+//            }
         }
     }
   
@@ -108,7 +116,7 @@ extension DetailedRecipe {
         Spacer()
             Button {
                 likedTapped.toggle()
-                vm.updateSavedRecipes(recipe: recipe)
+                vm.updateSavedRecipes(recipe: recipe, imageData: detailedRecipeVM.imageData!)
             } label: {
                 Image(systemName: likedTapped == true ? "heart.fill" : "heart")
                     .font(.title)

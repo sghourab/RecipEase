@@ -13,45 +13,85 @@ class SavedRecipesDataService {
     private let container: NSPersistentContainer
     private let containerName: String = "SavedRecipesContainer"
     private let entityName: String = "SavedRecipes"
+    private let tagEntityName: String = "Tags"
     
-    @Published var savedEntities: [SavedRecipes] = []
+    @Published var savedRecipes: [SavedRecipes] = []
+    @Published var savedRecipeTags: [Tags] = []
     
     
     init() {
         container = NSPersistentContainer(name: containerName)
-        container.loadPersistentStores { _, error in
+        container.loadPersistentStores { [self] _, error in
             if let error = error {
                 print("Error loading Core Data! \(error)")
             }
+            
             self.getSavedRecipes()
-           
+            self.getSavedRecipeTags()
+            
+            
         }
+        
+        
     }
     
-    func updateSavedRecipes(recipe: Recipe) {
+    func updateSavedRecipes(recipe: Recipe, imageData: Data) {
         //check if recipe is already saved:
-        if let entity = savedEntities.first(where: { $0.recipeID == Int16(recipe.id)
+        
+        if let entity = savedRecipes.first(where: { $0.recipeID == Int16(recipe.id)
         }) {
             delete(entity: entity)
         } else {
-            add(recipe: recipe)
+            add(recipe: recipe, imageData: imageData)
         }
     }
     
     private func getSavedRecipes() {
+        
         let request = NSFetchRequest<SavedRecipes>(entityName: entityName)
         do {
-            savedEntities =  try container.viewContext.fetch(request)
+            savedRecipes =  try container.viewContext.fetch(request)
         } catch {
             print("Error fetching saved recipes. \(error)")
         }
     }
     
-    private func add(recipe: Recipe) {
+    private func getSavedRecipeTags() {
+        let request = NSFetchRequest<Tags>(entityName: tagEntityName)
+        do {
+            savedRecipeTags =  try container.viewContext.fetch(request)
+        } catch {
+            print("Error fetching saved recipes. \(error)")
+        }
+    }
+    
+    private func add(recipe: Recipe, imageData: Data) {
         let entity = SavedRecipes(context: container.viewContext)
-        entity.recipeID = Int16(recipe.id)
+            entity.recipeID = Int16(recipe.id)
+            entity.recipeName = recipe.name
+            entity.image = imageData
+        if let tags = recipe.tags {
+            add(tags: tags, To: entity)
+        }
         applyChanges()
     }
+    
+    private func add(tags: [Tag], To recipe: SavedRecipes) {
+        let newTag = Tags(context: container.viewContext)
+        
+        
+            for tag in tags {
+            if tag.name?.lowercased() == MealTags.breakfast.rawValue || tag.name?.lowercased() == MealTags.lunch.rawValue || tag.name?.lowercased() == MealTags.dinner.rawValue || tag.name?.lowercased() == MealTags.appetizers.rawValue || tag.name?.lowercased() == MealTags.sides.rawValue || tag.name?.lowercased() == MealTags.snacks.rawValue || tag.name?.lowercased() == MealTags.desserts.rawValue {
+                newTag.name = tag.name
+            
+        }
+        }
+        newTag.recipes = recipe
+    }
+    
+//    private func add(tags: [String]) {
+//        let tags
+//    }
     
     private func delete(entity: SavedRecipes) {
         container.viewContext.delete(entity)
@@ -59,6 +99,7 @@ class SavedRecipesDataService {
     }
     
     private func save() {
+        
         do {
             try container.viewContext.save()
         } catch let error {
@@ -69,5 +110,6 @@ class SavedRecipesDataService {
     private func applyChanges() {
         save()
         getSavedRecipes()
+        getSavedRecipeTags()
     }
 }

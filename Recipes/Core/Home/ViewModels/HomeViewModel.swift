@@ -35,7 +35,7 @@ class HomeViewModel: ObservableObject {
     @Published var savedRecipesArrangedByTags: [String: [Recipe]] = [MealTags.breakfast.rawValue: [], MealTags.lunch.rawValue: [], MealTags.dinner.rawValue: [], MealTags.desserts.rawValue: [], MealTags.snacks.rawValue: [], "sides And Appetizers": []]
     
     @Published var savedRecipes: [Recipe] = []
-    @Published var savedRecipeIDs: [Int] = []
+    //@Published var savedRecipeIDs: [Int] = []
     @Published var showLikedView: Bool = false
     @Published var showHomeView: Bool = false
 
@@ -44,7 +44,7 @@ class HomeViewModel: ObservableObject {
         upDateMealTagsForURL()
         upDateURL()
         addSubscribers()
-        retrieveSavedIDsFromCoreData()
+      
     }
     
     func mealTagsSaveToAppStorage(){
@@ -125,8 +125,6 @@ class HomeViewModel: ObservableObject {
             .sink { [weak self] (returnedRecipes) in
                 self?.allRecipes = returnedRecipes
                 self?.showHomeView = true
-                print("all recipes count: \(self?.allRecipes.count)")
-                
             }
             .store(in: &cancellables)
     
@@ -134,198 +132,11 @@ class HomeViewModel: ObservableObject {
         
         
             }
-    
-    func retrieveSavedRecipesFromCoreData() {
-        dataService.getSavedRecipe(ids: [8246, 8357, 8280], completion: { savedRecipes in
-            self.savedRecipes = savedRecipes!
-        })
-//       dataService.getAllSavedRecipes(ids: [8246, 8357, 8280], completion: { savedRecipes in
-//           self.savedRecipes = savedRecipes!
-           self.arrangeRecipesByType()
-        
-      //  })
-       // arrangeRecipesByType()
-    }
-//
-//      func retrieveSavedRecipesFromCoreData() {
-//
-//          //dataService.urlString = TastyApiUrlGenerator.instance.urlGenerator(numberOfReturnedRecipes: "1000", mealTags: "")
-//        //  dataService.getRecipes()
-//         // for tag in MealTags.allCases {
-//        //  dataService.getRecipes()
-//       //  dataService.urlString = TastyApiUrlGenerator.instance.urlGenerator(numberOfReturnedRecipes: "100", mealTags: "")
-//         // dataService.getRecipes()
-//          $allRecipes
-//              .combineLatest(savedRecipesDataService.$savedEntities)
-//              .map({ allrecipes, savedRecipes -> [Recipe] in
-//                  var recipesInCommon: [Recipe] = []
-//                  for savedRecipe in savedRecipes {
-//
-//                      for recipe in allrecipes {
-//                              if recipe.id == savedRecipe.recipeID {
-//                                  recipesInCommon.append(recipe)
-//                              }
-//
-//                          }
-//
-//                      }
-//                  return recipesInCommon
-//
-//              })
-////          savedRecipesDataService.$savedEntities
-////              .combineLatest(dataService.$allRecipes)
-////              .map { (savedRecipes, recipes) -> [Recipe] in
-////                  savedRecipes
-////                      .compactMap { savedRecipe -> Recipe? in
-////                          print("SAved Recipe Name\(savedRecipe.recipeID)")
-////                                print("SAved Recipe Name\(savedRecipe.name)")
-////                          guard let recipe = recipes.first(where: { $0.id == savedRecipe.recipeID
-////
-////                          }) else {
-////                              return nil
-////                          }
-//////                          if tag.rawValue == "lunch" {
-////                              print("lunch name: \(recipe.name), tag IS: \(tag.rawValue)")
-////                          }
-//                          //print("RECIPE NAME\(recipe.name)")
-//                         // print("Recipe tags: \(recipe.tags)")
-//                             //   return recipe
-//                    //  }
-//           //   }
-//              .sink { [weak self] (recipesInCommon) in
-//               //   self?.isLoading = false
-//                  self?.savedRecipes = recipesInCommon
-//                  self?.arrangeRecipesByType()
-//
-////                  print("MealTag IS \(self?.mealTags)")
-////                  print("eeeeeek")
-//                 // print("her her here here\(self?.savedRecipes)")
-//
-//
-//              }
-//              .store(in: &cancellables)
-//         // }
-//      }
-        
-//            func mapAllRecipesToSavedRecipes(allRecipes: [Recipe], savedRecipes: [SavedRecipes]) -> [Recipe]{
-//                savedRecipes1 =   allRecipes
-//                      .filter {
-//                         savedRecipes.first(where: { $0.recipeID == recipe.id})
-//                      }
-//              }
-    
-    func retrieveSavedIDsFromCoreData() {
-        for entity in savedRecipesDataService.savedEntities {
-            savedRecipeIDs.append(Int(entity.recipeID))
-           
-        }
-        print("HERE: \(savedRecipeIDs)")
-    }
-    enum MealTags: String, CaseIterable {
-        case breakfast
-        case lunch
-        case dinner
-        case desserts
-        case snacks
-        case appetizers
-        case sides
-        
-        
-    }
-    
-    func arrangeRecipesByType(){
-       // print("called0")
-        print("The count")
-        print(savedRecipes.count)
-    
-        savedRecipesArrangedByTags = [MealTags.breakfast.rawValue: [], MealTags.lunch.rawValue: [], MealTags.dinner.rawValue: [], MealTags.desserts.rawValue: [], MealTags.snacks.rawValue: [], "sides And Appetizers": []]
-    
-        for recipe in savedRecipes {
-            
-            if let tags = recipe.tags {
-             
-                for tag in tags {
-                
-                    
-                  
-                  //  if !(savedRecipesArrangedByTags[MealTags.breakfast.rawValue]!.contains(where: {$0.id == recipe.id})) {
-                        if tag.name?.lowercased() == MealTags.breakfast.rawValue {
-                        savedRecipesArrangedByTags[MealTags.breakfast.rawValue]?.append(recipe)
-                   //         savedRecipesArrangedByTags[MealTags.breakfast.rawValue]!.uniqued()
-                            
-                        }
-                  //  }
 
-               //     if !(savedRecipesArrangedByTags[MealTags.lunch.rawValue]!.contains(where: {$0.id == recipe.id})) {
-
-                        if tag.name?.lowercased() == MealTags.lunch.rawValue {
-                       print(tag.name?.lowercased())
-                            savedRecipesArrangedByTags[MealTags.lunch.rawValue]?.append(recipe)
-                       // print("The recipe\(recipe)")
-                        print("in the arranged array \(savedRecipesArrangedByTags["lunch"])")
-                        }
-                //    }
-                    
-                  //  if !(savedRecipesArrangedByTags[MealTags.dinner.rawValue]!.contains(where: {$0.id == recipe.id})) {
-
-                    if tag.name?.lowercased() == MealTags.dinner.rawValue {
-                       
-                            savedRecipesArrangedByTags[MealTags.dinner.rawValue]?.append(recipe)
-                    }
-                  //  }
-                    
-                 //   if !(savedRecipesArrangedByTags[MealTags.desserts.rawValue]!.contains(where: {$0.id == recipe.id})) {
-//
-                    if tag.name?.lowercased() == MealTags.desserts.rawValue {
-                       
-                            savedRecipesArrangedByTags[MealTags.desserts.rawValue]?.append(recipe)
-                    }
-                 //   }
-                    
-                //    if !(savedRecipesArrangedByTags[MealTags.snacks.rawValue]!.contains(where: {$0.id == recipe.id})) {
-                    if tag.name?.lowercased() == MealTags.snacks.rawValue {
-                            savedRecipesArrangedByTags[MealTags.snacks.rawValue]?.append(recipe)
-                        }
-                 //   }
-                    
-                  //  if !(savedRecipesArrangedByTags["sides And Appetizers"]!.contains(where: {$0.id == recipe.id})) {
-                    if tag.name?.lowercased() == MealTags.sides.rawValue || tag.name?.lowercased() == MealTags.appetizers.rawValue {
-                       
-                            savedRecipesArrangedByTags["sides And Appetizers"]?.append(recipe)
-                 //       }
-                   
-                   }
-                   
-//                    let sortedSavedRecipeTags = savedRecipesArrangedByTags.sorted {
-//                        return $0.value.count > $1.value.count
-//                    }
-                   // print("MEMEMEMEME: \(sortedSavedRecipeTags)")
-//                    if tag.name?.lowercased() == "lunch" {
-////                        print("called2")
-////                        lunch.append(recipe)
-//                    }
-//                    if tag.name?.lowercased() == "dinner" {
-////                        dinner.append(recipe)
-//                    }
-//                    if tag.name?.lowercased() == "desserts" {
-////                        desserts.append(recipe)
-//                    }
-//                    if tag.name?.lowercased() == "snacks" {
-////                        snacks.append(recipe)
-//                    }
-//                    if tag.name?.lowercased() == "appetizers" || tag.name?.lowercased() == "sides" {
-////                        sidesAndAppetizers.append(recipe)
-//                    }
-                    
-                }
-            }
-        }
-        showLikedView = true
-    }
     
     
-    func updateSavedRecipes(recipe: Recipe){
-        savedRecipesDataService.updateSavedRecipes(recipe: recipe)
+    func updateSavedRecipes(recipe: Recipe, imageData: Data){
+        savedRecipesDataService.updateSavedRecipes(recipe: recipe, imageData: imageData)
     }
     
     func retrieveAllIngredientsInDownloadedRecipes(recipe: Recipe) -> [String]{
@@ -394,6 +205,16 @@ class HomeViewModel: ObservableObject {
 
 
     
-
+enum MealTags: String, CaseIterable {
+    case breakfast
+    case lunch
+    case dinner
+    case desserts
+    case snacks
+    case appetizers
+    case sides
+    
+    
+}
 
 

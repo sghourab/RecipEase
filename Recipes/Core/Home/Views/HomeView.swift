@@ -47,8 +47,8 @@ struct HomeView: View {
                 vm.mealTagsSaveToAppStorage()
                 vm.loadMealFiltersFromAppStorage()
                
-                vm.upDateURL()
-                vm.addSubscribers()
+              //  vm.upDateURL()
+              //  vm.addSubscribers()
                 
                 
             }
@@ -121,7 +121,8 @@ extension HomeView {
             .padding(.top, 0)
             .background(
                 NavigationLink(isActive: $showLikedRecipesView, destination: {
-                    LikedRecipesView(vm: LikedRecipesViewModel())
+                   NavigationLazyView(LikedRecipesView(vm: LikedRecipesViewModel()))
+                  // LikedRecipesView(vm: LikedRecipesViewModel())
                 }, label: {
                     EmptyView()
                 })
@@ -147,5 +148,15 @@ extension HomeView {
     private func segue(recipe: Recipe) {
         selectedRecipe = recipe
         showDetailedView.toggle()
+    }
+}
+
+struct NavigationLazyView<Content: View>: View {
+    let build: () -> Content
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    var body: Content {
+        build()
     }
 }

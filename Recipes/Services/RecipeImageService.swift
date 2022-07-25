@@ -29,10 +29,8 @@ class RecipeImageService {
     private func getRecipeImage(){
         if let savedImage = fileManager.getImage(imageName: imageName, folderName: folderName) {
             image = savedImage
-            //print("Retrieved image from File Manager")
         } else {
             downloadRecipeImage()
-            //print("Downlaoding image now")
         }
     }
     

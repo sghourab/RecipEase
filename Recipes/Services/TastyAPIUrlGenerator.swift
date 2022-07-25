@@ -30,7 +30,6 @@ class TastyApiUrlGenerator{
             URLQueryItem(name: "tags", value: mealTags),
            
         ]
-        print(components.string!)
         return(components.string!)
         
         

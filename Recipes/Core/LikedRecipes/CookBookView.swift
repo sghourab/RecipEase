@@ -7,15 +7,17 @@
 
 import SwiftUI
 
+
 struct CookBookView: View {
     
-    let recipe: Recipe?
+    let recipe: LikedRecipeModel?
     var mealType: String
     var mealTypeCount: String
     var body: some View {
         ZStack {
             if let recipe = recipe {
-                RecipeImageView(recipe: recipe)
+                Image(uiImage: recipe.image)
+                    .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 200)
                     .clipped()
@@ -54,9 +56,9 @@ struct CookBookView: View {
     }
 }
 
-struct CookBookView_Previews: PreviewProvider {
-    static var previews: some View {
-        CookBookView(recipe: dev.recipe, mealType: "Breakfast", mealTypeCount: "1")
-            .preferredColorScheme(.dark)
-    }
-}
+//struct CookBookView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CookBookView(recipe: dev.recipe, mealType: "Breakfast", mealTypeCount: "1")
+//            .preferredColorScheme(.dark)
+//    }
+//}

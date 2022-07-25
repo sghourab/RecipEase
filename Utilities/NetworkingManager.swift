@@ -49,6 +49,7 @@ class NetworkingManager {
             break
         case .failure(let error):
             print(String(describing: error))
+            print("The ERROR IM LOOKING FOR: \(error.localizedDescription)")
         }
     }
 }
