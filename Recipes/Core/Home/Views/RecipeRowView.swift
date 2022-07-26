@@ -18,8 +18,6 @@ struct RecipeRowView: View {
             VStack(alignment: .leading){
                 Spacer()
                 Text(recipe.name)
-                    //.frame(maxWidth: .infinity)
-                    //.frame(height: 20)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.theme.secondaryText)

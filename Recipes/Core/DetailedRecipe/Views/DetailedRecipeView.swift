@@ -26,9 +26,7 @@ struct DetailedRecipe: View {
     @EnvironmentObject private var vm: HomeViewModel
     var recipe: Recipe
     @State var likedTapped: Bool = false
-   // @State var savedRecipeIDs: [Int] = []
     @State private var showInstructions: Bool = false
-   // let savedRecipesCD = SavedRecipesDataService()
     @StateObject var detailedRecipeVM: DetailedRecipeViewModel
     
     init(recipe: Recipe) {
@@ -83,10 +81,7 @@ struct DetailedRecipe: View {
                     likedTapped = true
             }
             }
-//            if vm.savedRecipeIDs.contains(recipe.id) {
-//                print("it does")
-//                likedTapped = true
-//            }
+
         }
     }
   
@@ -138,10 +133,7 @@ extension DetailedRecipe {
                 
             } label: {
                 Text(recipe.numServings != nil ? "\(recipe.numServings ?? 0) servings" : "")
-                    
-//                Image(systemName: "chevron.down")
-//                    .offset(y: 3)
-//                    .padding(.leading, 0)
+  
             }
    
        }.foregroundColor(Color.theme.secondaryText)
@@ -204,7 +196,7 @@ extension DetailedRecipe {
     private var ingredientsList: some View {
         List {
             if let sections = recipe.sections {
-               // if sections.count > 1 {
+               
                 ForEach(sections, id: \.position) { section in
                   
                     if sections.count > 1 {

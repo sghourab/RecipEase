@@ -13,16 +13,27 @@ import SwiftUI
 struct RecipesApp: App {
     
     @StateObject private var vm = HomeViewModel()
+    @State var showLaunchView = true
     
     var body: some Scene {
         WindowGroup {
+            ZStack {
             NavigationView {
-                //DetailedRecipeLoadingView()
+                
+                
                 HomeView()
                     .navigationBarHidden(true)
             }
             .environmentObject(vm)
+                if showLaunchView == true {
+                LaunchView()
             
+                }
+            }.onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                  showLaunchView = false
+            }
         }
     }
+}
 }

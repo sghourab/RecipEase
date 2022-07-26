@@ -731,12 +731,7 @@ struct Recipe: Identifiable, Codable {
         }
     }
     
-    
-//    var numServingsString: String {
-//        if let numServings = numServings {
-//            return "
-//        }
-//    }
+
 }
 
 // MARK: - Credit

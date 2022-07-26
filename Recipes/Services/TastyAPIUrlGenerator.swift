@@ -17,7 +17,7 @@ class TastyApiUrlGenerator{
     
     init() {}
 
-    func urlGenerator(numberOfReturnedRecipes: String? = "50", mealTags: String?) -> String{
+    func urlGenerator(numberOfReturnedRecipes: String? = "100", mealTags: String?) -> String{
 
         var components = URLComponents()
         components.scheme = "https"

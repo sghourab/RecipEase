@@ -88,8 +88,11 @@ extension FilterRecipesView {
                     }
                     
                 
-                vm.mealTags = mealTagsString
-            //vm.dataService.urlString
+            vm.mealTags = mealTagsString
+            vm.upDateURL()
+            vm.addSubscribers()
+            vm.mealTagsSaveToAppStorage()
+            vm.loadMealFiltersFromAppStorage()
                 
             
             dismiss()
@@ -203,27 +206,5 @@ extension FilterRecipesView {
 
 }
 
-//struct MealFilterGridView: View {
-//    
-//    var filterOptions: [MealPreferences]
-//    var index: Int
-//    
-//    var body: some View {
-//    
-//        
-//       
-//            RoundedRectangle(cornerRadius: 15)
-//                .fill(filterOptions[index].include ? Color.theme.accent : Color.theme.background)
-//            .frame(height: 50)
-//            .shadow(color: Color.theme.accent.opacity(0.8), radius: 9)
-//            .padding()
-//            .overlay(
-//                Text((filterOptions[index].mealTag))
-//                    .bold()
-//                    .foregroundColor(filterOptions[index].include ? Color.theme.secondaryText : Color.theme.accent)
-//            )
-//        }
-//
-//    
-//    
-//}
+
+

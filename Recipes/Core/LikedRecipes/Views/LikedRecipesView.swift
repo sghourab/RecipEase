@@ -12,6 +12,9 @@ import Combine
 struct LikedRecipesView: View {
     
     @ObservedObject var vm: LikedRecipesViewModel
+    @EnvironmentObject private var homeVM: HomeViewModel
+    @State private var selectedRecipe: Recipe? = nil
+    @State private var showDetailedView: Bool = false
 
     private let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -30,6 +33,15 @@ struct LikedRecipesView: View {
                myLikedRecipesView
                
                myLikedRecipesGridView
+                   .background(
+                       NavigationLink(
+                           isActive: $showDetailedView,
+                           destination: {
+                               DetailedRecipeLoadingView(recipe: $selectedRecipe)
+                           },
+                           label: { EmptyView() })
+                   )
+                   
 
                
            }
@@ -52,7 +64,6 @@ extension LikedRecipesView {
     var myCookBooksHScroll: some View {
         VStack {
         ScrollView(.horizontal, showsIndicators: false) {
-            //if vm.showLikedView {
             HStack {
                 ForEach(vm.savedRecipesArrangedByTags.sorted{$0.value.count > $1.value.count}, id: \.key) { key, value in
 
@@ -95,28 +106,42 @@ extension LikedRecipesView {
                         
                     ForEach(vm.savedRecipes) { recipe in
                             Button {
-
-                                
-                             //   vm.mealTypeDefaults[index].include.toggle()
+                                segue(recipe: recipe)
                              
                             } label: {
+                                
                                 VStack {
-                                Image(uiImage: recipe.image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 180, height: 180)
-                                    .clipped()
+                                    ZStack{
+                                        Image(uiImage: recipe.image)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 180, height: 180)
+                                            .clipped()
+                                            .overlay(Color.black.opacity(0.2))
+                                        
+
+                                    }
                                     
                                     Text(recipe.name)
                                         .font(.headline)
                                         .foregroundColor(.primary)
-                                }
+                                
+                                    
                                 
                             }
+                    }
                         }
         
             
                 }
+    }
+    
+    private func segue(recipe: LikedRecipeModel) {
+        homeVM.dataService.getSavedRecipe(id: recipe.id, completion: { recipe in
+            selectedRecipe = recipe
+            self.showDetailedView.toggle()
+        })
+       
     }
 }
 struct LikedRecipesView_Previews: PreviewProvider {

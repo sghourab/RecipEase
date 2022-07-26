@@ -11,7 +11,6 @@ import SwiftUI
 
 class DetailedRecipeViewModel: ObservableObject {
     
-  //  @Published var image: UIImage? = nil
     @Published var isLoading: Bool = false
     @Published var imageData: Data? = nil
     
@@ -33,7 +32,6 @@ class DetailedRecipeViewModel: ObservableObject {
             .sink { [weak self] _ in
                 self?.isLoading = false
             } receiveValue: { [weak self] (returnedImage) in
-                //self?.image = returnedImage
                 self?.imageData = returnedImage?.jpegData(compressionQuality: 1.0)
             }
             .store(in: &cancellables)

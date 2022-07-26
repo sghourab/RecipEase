@@ -76,7 +76,6 @@ struct HomeView_Previews: PreviewProvider {
         }
         .environmentObject(dev.homeVM)
         .previewInterfaceOrientation(.portrait)
-       // .preferredColorScheme(.dark)
     }
 }
 

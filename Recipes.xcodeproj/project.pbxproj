@@ -26,6 +26,7 @@
 		005444772887382B0043A0D1 /* DetailedRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005444762887382B0043A0D1 /* DetailedRecipeViewModel.swift */; };
 		0054447A288EF2740043A0D1 /* LikedRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00544479288EF2740043A0D1 /* LikedRecipesViewModel.swift */; };
 		0054447C288EF2BB0043A0D1 /* LikedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054447B288EF2BB0043A0D1 /* LikedRecipe.swift */; };
+		00544486288F10520043A0D1 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00544485288F10520043A0D1 /* LaunchView.swift */; };
 		00961C7828452FC10004E4DC /* RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00961C7728452FC10004E4DC /* RecipesApp.swift */; };
 		00961C7A28452FC10004E4DC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00961C7928452FC10004E4DC /* ContentView.swift */; };
 		00961C7C28452FC30004E4DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00961C7B28452FC30004E4DC /* Assets.xcassets */; };
@@ -64,6 +65,8 @@
 		005444762887382B0043A0D1 /* DetailedRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRecipeViewModel.swift; sourceTree = "<group>"; };
 		00544479288EF2740043A0D1 /* LikedRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedRecipesViewModel.swift; sourceTree = "<group>"; };
 		0054447B288EF2BB0043A0D1 /* LikedRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedRecipe.swift; sourceTree = "<group>"; };
+		00544480288F0CBB0043A0D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		00544485288F10520043A0D1 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		00961C7428452FC10004E4DC /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00961C7728452FC10004E4DC /* RecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesApp.swift; sourceTree = "<group>"; };
 		00961C7928452FC10004E4DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -154,6 +157,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		00544481288F0D090043A0D1 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				00544482288F0D260043A0D1 /* Views */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		00544482288F0D260043A0D1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00544485288F10520043A0D1 /* LaunchView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		00961C6B28452FC10004E4DC = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +194,7 @@
 		00961C7628452FC10004E4DC /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				00544480288F0CBB0043A0D1 /* Info.plist */,
 				00961C7728452FC10004E4DC /* RecipesApp.swift */,
 				00961C852845370A0004E4DC /* Extensions */,
 				00CD73BF284EF1BF00B4A811 /* Services */,
@@ -210,6 +230,7 @@
 		00961C8828453BB00004E4DC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				00544481288F0D090043A0D1 /* Launch */,
 				00961C8D2845C7810004E4DC /* Home */,
 				005444452868F3380043A0D1 /* DetailedRecipe */,
 				00544460287724750043A0D1 /* LikedRecipes */,
@@ -379,6 +400,7 @@
 				00CD73BE284E78EA00B4A811 /* HomeViewModel.swift in Sources */,
 				00544449286A0B4E0043A0D1 /* MealTagsPreferences.swift in Sources */,
 				00544436285A1CD50043A0D1 /* LocalFileManager.swift in Sources */,
+				00544486288F10520043A0D1 /* LaunchView.swift in Sources */,
 				0054444D286B5D100043A0D1 /* MealFilterGridView.swift in Sources */,
 				00CD73C72856E50E00B4A811 /* RecipeImageView.swift in Sources */,
 				00544438285A2B990043A0D1 /* SearchBarView.swift in Sources */,
@@ -538,9 +560,10 @@
 				DEVELOPMENT_TEAM = R557EG7BZV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Recipes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -568,9 +591,10 @@
 				DEVELOPMENT_TEAM = R557EG7BZV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Recipes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

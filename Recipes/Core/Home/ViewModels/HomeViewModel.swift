@@ -13,10 +13,7 @@ import CoreData
 class HomeViewModel: ObservableObject {
     
     @Published var allRecipes: [Recipe] = []
-    @Published var personalRecipes: [Recipe] = []
-    
     @Published var searchText: String = ""
-  //  @Published var savedRecipes: [Recipe] = []
     
     @Published var dataService = RecipeDataService()
     let savedRecipesDataService = SavedRecipesDataService()
@@ -35,7 +32,6 @@ class HomeViewModel: ObservableObject {
     @Published var savedRecipesArrangedByTags: [String: [Recipe]] = [MealTags.breakfast.rawValue: [], MealTags.lunch.rawValue: [], MealTags.dinner.rawValue: [], MealTags.desserts.rawValue: [], MealTags.snacks.rawValue: [], "sides And Appetizers": []]
     
     @Published var savedRecipes: [Recipe] = []
-    //@Published var savedRecipeIDs: [Int] = []
     @Published var showLikedView: Bool = false
     @Published var showHomeView: Bool = false
 
@@ -102,8 +98,6 @@ class HomeViewModel: ObservableObject {
                     mealTags += " \(menu.mealTag.lowercased())"
                 }
             }
-            
-        
         
 }
     func upDateURL() {
@@ -116,7 +110,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func addSubscribers() {
-       
+       showHomeView = false
         //Updates all recipes including search text items in search bar
     $searchText
             .combineLatest(dataService.$allRecipes)
@@ -127,9 +121,7 @@ class HomeViewModel: ObservableObject {
                 self?.showHomeView = true
             }
             .store(in: &cancellables)
-    
-            
-        
+   
         
             }
 

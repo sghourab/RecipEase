@@ -37,7 +37,7 @@ struct CookBookView: View {
             
         .overlay(alignment: .center) {
             ZStack {
-                Color.black.opacity(0.2)
+                Color.black.opacity(0.4)
                 VStack{
                     Text(mealType)
                         .font(.title)
