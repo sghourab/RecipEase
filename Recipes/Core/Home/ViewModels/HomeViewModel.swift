@@ -14,33 +14,29 @@ class HomeViewModel: ObservableObject {
     
     @Published var allRecipes: [Recipe] = []
     @Published var searchText: String = ""
-    
     @Published var dataService = RecipeDataService()
     let savedRecipesDataService = SavedRecipesDataService()
-    
     @Published  var mealTypeDefaults: [MealPreferences] = [MealPreferences(mealTag: "Breakfast", include: false), MealPreferences(mealTag: "Lunch", include: false), MealPreferences(mealTag: "Dinner", include: false), MealPreferences(mealTag: "Sides", include: false), MealPreferences(mealTag: "Appetizers", include: false), MealPreferences(mealTag: "Snacks", include: false), MealPreferences(mealTag: "Desserts", include: false)]
     @Published var mealType: [MealPreferences] = []
     @Published var menuTypeDefaults: [MealPreferences] = [MealPreferences(mealTag: "Low-carb", include: false), MealPreferences(mealTag: "Keto", include: false), MealPreferences(mealTag: "Vegetarian", include: false), MealPreferences(mealTag: "Pescatarian", include: false), MealPreferences(mealTag: "Vegan", include: false)]
     @Published var menuType: [MealPreferences] = []
-   
-    private var cancellables = Set<AnyCancellable>()
     @Published var urlGenerator = TastyApiUrlGenerator()
     @AppStorage("mealTagsPreferences") var mealTagsPreferences: Data = Data()
-    @AppStorage("menuTagsPreferences") var menuTagsPreferences: Data = Data()
-    
+    @AppStorage("menuTagsPreferences") var menuTagsPreferences: Data = Data()    
     @Published var mealTags: String = ""
     @Published var savedRecipesArrangedByTags: [String: [Recipe]] = [MealTags.breakfast.rawValue: [], MealTags.lunch.rawValue: [], MealTags.dinner.rawValue: [], MealTags.desserts.rawValue: [], MealTags.snacks.rawValue: [], "sides And Appetizers": []]
-    
     @Published var savedRecipes: [Recipe] = []
     @Published var showLikedView: Bool = false
     @Published var showHomeView: Bool = false
+    private var cancellables = Set<AnyCancellable>()
 
     init() {
+        
         loadMealFiltersFromAppStorage()
         upDateMealTagsForURL()
         upDateURL()
         addSubscribers()
-      
+        print("Lets go \(dataService.urlString)")
     }
     
     func mealTagsSaveToAppStorage(){
@@ -72,7 +68,6 @@ class HomeViewModel: ObservableObject {
     
     func loadMealFiltersFromAppStorage () {
        
-       
         guard let mealTagsettings = try?
         JSONDecoder().decode([MealPreferences].self, from: mealTagsPreferences) else { return }
         mealType = mealTagsettings
@@ -80,9 +75,7 @@ class HomeViewModel: ObservableObject {
         guard let menuTagsettings = try?
         JSONDecoder().decode([MealPreferences].self, from: menuTagsPreferences) else { return }
         menuType = menuTagsettings
-        
-        
-        
+    
     }
 
     func upDateMealTagsForURL() {
@@ -102,7 +95,7 @@ class HomeViewModel: ObservableObject {
 }
     func upDateURL() {
      
-        dataService.urlString = TastyApiUrlGenerator.instance.urlGenerator(numberOfReturnedRecipes: "50", mealTags: mealTags)
+        dataService.urlString = TastyApiUrlGenerator.instance.urlGenerator(numberOfReturnedRecipes: "100", mealTags: mealTags)
         dataService.getRecipes()
         
        
